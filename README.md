@@ -10,6 +10,9 @@ First to download dependent packages:
 - download nodejs's dependent packages in the main directory.
 - download react's dependent packages in the directory movielator2_frontend.
 
+Following installing [redis](https://redis.io/), to run the Caching system on the default port 6379, run:
+- ### `redis-cli`
+
 Following downloading dependent packages, to run backend engine, from main directory run:
 
 - ### `cd server`
