@@ -1,5 +1,5 @@
 # movielator2
-A simple web scraping based movie searching tool implemented using [NodeJs](https://nodejs.org/en/) [puppeteer](https://www.npmjs.com/package/puppeteer) as backend engine and [reactjs](https://reactjs.org/) [chakra-ui](https://chakra-ui.com/) as a frontend. 
+A simple web scraping based movie searching tool implemented using [NodeJs](https://nodejs.org/en/) [puppeteer](https://www.npmjs.com/package/puppeteer) as backend engine, [redis](https://redis.io/) as a Caching system and [reactjs](https://reactjs.org/) [chakra-ui](https://chakra-ui.com/) as a frontend. 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 
