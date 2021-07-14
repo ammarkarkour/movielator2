@@ -1,6 +1,7 @@
 // server/index.js
 const express = require("express");
 const puppeteer = require('puppeteer');
+const redis = require('redis');
 
 // scrap the web to get movie details
 async function main(movie) {
@@ -35,15 +36,39 @@ async function main(movie) {
     })
 
     browser.close()
+
+    // Set result to Redis with 1 hour expiration
+    redis_client.setex(movie, 3600, JSON.stringify(result))
+
     return result
 }
+
+
+// Cche middleware
+async function cache(req, res, next){
+    let movie = await req.params["movie"];
+
+    redis_client.get(movie, (err, data) => {
+        if (err) throw err;
+
+        if (data !== null){
+            res.send(JSON.parse(data))
+        } else {
+            next();
+        }
+    })
+}
+
+// set up redis
+const REDIS_PORT = process.env.PORT || 6379;
+const redis_client = redis.createClient(REDIS_PORT);
 
 // set up server
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Server's API
-app.get("/api/:movie", async (req, res) => {
+app.get("/api/:movie", cache, async (req, res) => {
     let result = await main(req.params["movie"]);
     res.send(result);
 });
